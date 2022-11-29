@@ -53,14 +53,18 @@ public class Post {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Post)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Post post = (Post) o;
-        return getId() == post.getId() && Objects.equals(getName(), post.getName()) && Objects.equals(getDescription(), post.getDescription()) && Objects.equals(getDate(), post.getDate());
+        return id == post.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getDescription(), getDate());
+        return Objects.hash(id);
     }
 }
