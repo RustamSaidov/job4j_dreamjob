@@ -1,5 +1,6 @@
 package ru.job4j.dreamjob.model;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -7,12 +8,12 @@ public class Post {
     private int id;
     private String name;
     private String description;
-    private Date date;
+    private LocalDateTime date;
 
     public Post() {
     }
 
-    public Post(int id, String name, String description, Date date) {
+    public Post(int id, String name, String description, LocalDateTime date) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -43,11 +44,11 @@ public class Post {
         this.description = description;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

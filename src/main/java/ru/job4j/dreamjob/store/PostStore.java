@@ -2,8 +2,8 @@ package ru.job4j.dreamjob.store;
 
 import ru.job4j.dreamjob.model.Post;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -14,9 +14,9 @@ public class PostStore {
     private final Map<Integer, Post> posts = new ConcurrentHashMap<>();
 
     private PostStore() {
-        posts.put(1, new Post(1, "Junior Java Job", "Работа для начинающего программиста", new Date()));
-        posts.put(2, new Post(2, "Middle Java Job","Работа для опытного программиста", new Date()));
-        posts.put(3, new Post(3, "Senior Java Job","Работа для кунг-фу программиста", new Date()));
+        posts.put(1, new Post(1, "Junior Java Job", "Работа для начинающего программиста", LocalDateTime.now()));
+        posts.put(2, new Post(2, "Middle Java Job","Работа для опытного программиста", LocalDateTime.now()));
+        posts.put(3, new Post(3, "Senior Java Job","Работа для кунг-фу программиста", LocalDateTime.now()));
     }
 
     public static PostStore instOf() {
