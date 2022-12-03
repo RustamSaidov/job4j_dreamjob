@@ -24,4 +24,6 @@ public class PostController {
         model.addAttribute("post", new Post(0, "Заполните название", "Заполните описание", LocalDateTime.now()));
         return "addPost";
     }
+
+
 }
