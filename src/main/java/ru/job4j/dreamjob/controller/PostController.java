@@ -3,9 +3,11 @@ package ru.job4j.dreamjob.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import ru.job4j.dreamjob.model.Post;
 import ru.job4j.dreamjob.store.PostStore;
-
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 
 @Controller
@@ -25,5 +27,19 @@ public class PostController {
         return "addPost";
     }
 
+    /*Это старый доспринговский вариант:
+    @PostMapping("/createPost")
+    public String createPost(HttpServletRequest req) {
+        String name = req.getParameter("name");
+        System.out.println(name);
+        postStore.add(new Post(1, name));
+        return "redirect:/posts";
+    }
+     */
 
+    @PostMapping("/createPost")
+    public String createPost(@ModelAttribute Post post) {
+        postStore.add(post);
+        return "redirect:/posts";
+    }
 }

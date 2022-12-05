@@ -15,8 +15,8 @@ public class PostStore {
 
     private PostStore() {
         posts.put(1, new Post(1, "Junior Java Job", "Работа для начинающего программиста", LocalDateTime.now()));
-        posts.put(2, new Post(2, "Middle Java Job","Работа для опытного программиста", LocalDateTime.now()));
-        posts.put(3, new Post(3, "Senior Java Job","Работа для кунг-фу программиста", LocalDateTime.now()));
+        posts.put(2, new Post(2, "Middle Java Job", "Работа для опытного программиста", LocalDateTime.now()));
+        posts.put(3, new Post(3, "Senior Java Job", "Работа для кунг-фу программиста", LocalDateTime.now()));
     }
 
     public static PostStore instOf() {
@@ -25,5 +25,9 @@ public class PostStore {
 
     public Collection<Post> findAll() {
         return posts.values();
+    }
+
+    public void add(Post post) {
+        posts.put(post.getId(), post);
     }
 }
