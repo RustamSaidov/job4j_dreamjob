@@ -34,4 +34,12 @@ public class CandidateStore {
     public void add(Candidate candidate) {
         candidates.put(candidate.getId(), candidate);
     }
+
+    public Candidate findById(Integer id) {
+        return candidates.get(id);
+    }
+
+    public Candidate update(Candidate candidate) {
+        return candidates.replace(candidate.getId(), candidate);
+    }
 }

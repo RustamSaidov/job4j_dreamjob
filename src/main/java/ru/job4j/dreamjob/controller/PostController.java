@@ -44,6 +44,7 @@ public class PostController {
     @PostMapping("/createPost")
     public String createPost(@ModelAttribute Post post) {
         post.setId(PostStore.getId());
+        post.setDate(LocalDateTime.now());
         postStore.add(post);
         return "redirect:/posts";
     }
@@ -56,6 +57,7 @@ public class PostController {
 
     @PostMapping("/updatePost")
     public String updatePost(@ModelAttribute Post post) {
+        post.setDate(LocalDateTime.now());
         postStore.update(post);
         return "redirect:/posts";
     }
