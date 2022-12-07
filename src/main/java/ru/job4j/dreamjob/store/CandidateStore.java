@@ -6,11 +6,12 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class CandidateStore {
     private static final CandidateStore INST = new CandidateStore();
-
     private final Map<Integer, Candidate> candidates = new ConcurrentHashMap<>();
+    private static AtomicInteger id = new AtomicInteger();
 
     private CandidateStore() {
         candidates.put(1, new Candidate(1, "Женя Иванов ", "Выпускник Geek brains", LocalDateTime.now()));
@@ -20,6 +21,10 @@ public class CandidateStore {
 
     public static CandidateStore instOf() {
         return INST;
+    }
+
+    public static int getId() {
+        return id.getAndIncrement();
     }
 
     public Collection<Candidate> findAll() {

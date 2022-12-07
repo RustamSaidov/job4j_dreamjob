@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class PostController {
 
     private final PostStore postStore = PostStore.instOf();
-    private static AtomicInteger id = new AtomicInteger();
+
 
     @GetMapping("/posts")
     public String posts(Model model) {
@@ -43,7 +43,7 @@ public class PostController {
 
     @PostMapping("/createPost")
     public String createPost(@ModelAttribute Post post) {
-        post.setId(id.getAndIncrement());
+        post.setId(PostStore.getId());
         postStore.add(post);
         return "redirect:/posts";
     }

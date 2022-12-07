@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Controller
 public class CandidateController {
     private final CandidateStore candidateStore = CandidateStore.instOf();
-    private static AtomicInteger id = new AtomicInteger();
+
 
     @GetMapping("/candidates")
     public String candidates(Model model) {
@@ -30,7 +30,7 @@ public class CandidateController {
 
     @PostMapping("/createCandidate")
     public String createCandidate(@ModelAttribute Candidate candidate) {
-        candidate.setId(id.getAndIncrement());
+        candidate.setId(CandidateStore.getId());
         candidateStore.add(candidate);
         return "redirect:/candidates";
     }
