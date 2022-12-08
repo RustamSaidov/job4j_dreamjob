@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.job4j.dreamjob.model.Candidate;
 import ru.job4j.dreamjob.store.CandidateStore;
+import ru.job4j.dreamjob.store.PostStore;
 
 import java.time.LocalDateTime;
 
@@ -30,7 +31,7 @@ public class CandidateController {
 
     @PostMapping("/createCandidate")
     public String createCandidate(@ModelAttribute Candidate candidate) {
-        candidate.setId(CandidateStore.getId());
+        candidate.setId(CandidateStore.getUniqueId(candidateStore));
         candidate.setDate(LocalDateTime.now());
         candidateStore.add(candidate);
         return "redirect:/candidates";

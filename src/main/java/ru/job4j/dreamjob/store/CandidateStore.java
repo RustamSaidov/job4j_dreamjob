@@ -23,8 +23,11 @@ public class CandidateStore {
         return INST;
     }
 
-    public static int getId() {
-        return id.getAndIncrement();
+    public static int getUniqueId(CandidateStore candidateStore) {
+        while (candidateStore.candidates.containsKey(id.get())) {
+            id.incrementAndGet();
+        }
+        return id.get();
     }
 
     public Collection<Candidate> findAll() {
