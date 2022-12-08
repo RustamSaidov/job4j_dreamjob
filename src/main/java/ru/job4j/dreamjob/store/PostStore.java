@@ -24,8 +24,11 @@ public class PostStore {
         return INST;
     }
 
-    public static int getId() {
-        return id.getAndIncrement();
+    public static int getUniqueId(PostStore postStore) {
+        while (postStore.posts.containsKey(id.get())) {
+            id.incrementAndGet();
+        }
+        return id.get();
     }
 
     public Collection<Post> findAll() {

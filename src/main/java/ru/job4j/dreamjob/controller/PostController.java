@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ru.job4j.dreamjob.model.Post;
 import ru.job4j.dreamjob.store.PostStore;
 
-import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Controller
 public class PostController {
@@ -43,7 +41,7 @@ public class PostController {
 
     @PostMapping("/createPost")
     public String createPost(@ModelAttribute Post post) {
-        post.setId(PostStore.getId());
+        post.setId(PostStore.getUniqueId(postStore));
         post.setDate(LocalDateTime.now());
         postStore.add(post);
         return "redirect:/posts";
