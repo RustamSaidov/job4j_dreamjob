@@ -31,7 +31,6 @@ public class CandidateController {
 
     @PostMapping("/createCandidate")
     public String createCandidate(@ModelAttribute Candidate candidate) {
-        candidate.setId(CandidateStore.getUniqueId(candidateStore));
         candidate.setDate(LocalDateTime.now());
         candidateStore.add(candidate);
         return "redirect:/candidates";

@@ -23,8 +23,8 @@ public class CandidateStore {
         return INST;
     }
 
-    public static int getUniqueId(CandidateStore candidateStore) {
-        while (candidateStore.candidates.containsKey(id.get())) {
+    public int getUniqueId() {
+        while (candidates.containsKey(id.get())) {
             id.incrementAndGet();
         }
         return id.get();
@@ -35,6 +35,7 @@ public class CandidateStore {
     }
 
     public void add(Candidate candidate) {
+        candidate.setId(getUniqueId());
         candidates.put(candidate.getId(), candidate);
     }
 

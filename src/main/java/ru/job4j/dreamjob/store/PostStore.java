@@ -24,8 +24,8 @@ public class PostStore {
         return INST;
     }
 
-    public static int getUniqueId(PostStore postStore) {
-        while (postStore.posts.containsKey(id.get())) {
+    public int getUniqueId() {
+        while (posts.containsKey(id.get())) {
             id.incrementAndGet();
         }
         return id.get();
@@ -36,6 +36,7 @@ public class PostStore {
     }
 
     public void add(Post post) {
+        post.setId(getUniqueId());
         posts.put(post.getId(), post);
     }
 
