@@ -30,6 +30,7 @@ public class CandidateStore {
         return id.get();
     }
 
+
     public Collection<Candidate> findAll() {
         return candidates.values();
     }
