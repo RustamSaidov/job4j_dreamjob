@@ -1,14 +1,15 @@
 package ru.job4j.dreamjob.store;
 
+import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.Candidate;
-
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@ThreadSafe
 @Repository
 public class CandidateStore {
 
@@ -27,7 +28,6 @@ public class CandidateStore {
         }
         return id.get();
     }
-
 
     public Collection<Candidate> findAll() {
         return candidates.values();
