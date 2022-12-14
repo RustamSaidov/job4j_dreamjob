@@ -1,7 +1,6 @@
 package ru.job4j.dreamjob.model;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Objects;
 
 public class Candidate {
@@ -9,6 +8,11 @@ public class Candidate {
     private String name;
     private String desc;
     private LocalDateTime date;
+    private boolean visible;
+    private City city;
+
+    private Candidate() {
+    }
 
     public Candidate(int id, String name, String desc, LocalDateTime date) {
         this.id = id;
@@ -47,6 +51,22 @@ public class Candidate {
 
     public void setDate(LocalDateTime date) {
         this.date = date;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 
     @Override

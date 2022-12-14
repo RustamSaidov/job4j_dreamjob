@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.job4j.dreamjob.model.Post;
+import ru.job4j.dreamjob.service.CityService;
 import ru.job4j.dreamjob.service.PostService;
 
 import java.time.LocalDateTime;
@@ -17,9 +18,11 @@ import java.time.LocalDateTime;
 public class PostController {
 
     private final PostService postService;
+    private final CityService cityService;
 
-    public PostController(PostService postService) {
+    public PostController(PostService postService, CityService cityService) {
         this.postService = postService;
+        this.cityService = cityService;
     }
 
     @GetMapping("/posts")
@@ -29,20 +32,10 @@ public class PostController {
     }
 
     @GetMapping("/formAddPost")
-    public String addPost(Model model) {
-        model.addAttribute("post", new Post(0, "Заполните название", "Заполните описание", LocalDateTime.now()));
+    public String formAddPost(Model model) {
+        model.addAttribute("cities", cityService.getAllCities());
         return "addPost";
     }
-
-    /*Это старый доспринговский вариант:
-    @PostMapping("/createPost")
-    public String createPost(HttpServletRequest req) {
-        String name = req.getParameter("name");
-        System.out.println(name);
-        postStore.add(new Post(1, name));
-        return "redirect:/posts";
-    }
-     */
 
     @PostMapping("/createPost")
     public String createPost(@ModelAttribute Post post) {
