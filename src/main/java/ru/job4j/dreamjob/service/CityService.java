@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.job4j.dreamjob.model.City;
 import ru.job4j.dreamjob.store.CityStore;
 
-import java.util.*;
+import java.util.Collection;
 
 @ThreadSafe
 @Service
@@ -24,6 +24,7 @@ public class CityService {
     public City findById(int id) {
         return store.findById(id);
     }
+
     public void add(City city) {
         store.add(city);
     }

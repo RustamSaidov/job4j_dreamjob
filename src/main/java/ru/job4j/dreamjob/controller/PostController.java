@@ -40,6 +40,7 @@ public class PostController {
     @PostMapping("/createPost")
     public String createPost(@ModelAttribute Post post) {
         post.setDate(LocalDateTime.now());
+        System.out.println(post.isVisible());
         postService.add(post);
         return "redirect:/posts";
     }

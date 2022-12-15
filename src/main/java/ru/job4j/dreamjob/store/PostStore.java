@@ -16,11 +16,13 @@ public class PostStore {
 
     private final Map<Integer, Post> posts = new ConcurrentHashMap<>();
     private static AtomicInteger id = new AtomicInteger();
+    private final CityStore cityStore;
 
-    private PostStore() {
-        posts.put(1, new Post(1, "Junior Java Job", "Работа для начинающего программиста", LocalDateTime.now()));
-        posts.put(2, new Post(2, "Middle Java Job", "Работа для опытного программиста", LocalDateTime.now()));
-        posts.put(3, new Post(3, "Senior Java Job", "Работа для кунг-фу программиста", LocalDateTime.now()));
+    private PostStore(CityStore cityStore) {
+        this.cityStore = cityStore;
+        posts.put(1, new Post(1, "Junior Java Job", "Работа для начинающего программиста", LocalDateTime.now(), true, cityStore.findById(1)));
+        posts.put(2, new Post(2, "Middle Java Job", "Работа для опытного программиста", LocalDateTime.now(), true, cityStore.findById(1)));
+        posts.put(3, new Post(3, "Senior Java Job", "Работа для кунг-фу программиста", LocalDateTime.now(), true, cityStore.findById(1)));
     }
 
     public int getUniqueId() {
