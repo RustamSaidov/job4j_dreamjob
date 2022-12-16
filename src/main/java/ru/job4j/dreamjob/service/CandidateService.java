@@ -37,6 +37,7 @@ public class CandidateService {
     }
 
     public Candidate update(Candidate candidate) {
+        candidate.setCity(cityStore.findById(candidate.getCity().getId()));
         return store.update(candidate);
     }
 }

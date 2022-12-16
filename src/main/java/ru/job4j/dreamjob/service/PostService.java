@@ -37,6 +37,7 @@ public class PostService {
     }
 
     public Post update(Post post) {
+        post.setCity(cityStore.findById(post.getCity().getId()));
         return store.update(post);
     }
 }
