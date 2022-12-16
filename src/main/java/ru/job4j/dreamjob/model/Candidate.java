@@ -11,17 +11,28 @@ public class Candidate implements Serializable {
     private LocalDateTime date;
     private boolean visible;
     private City city;
+    private byte[] photo;
 
     private Candidate() {
     }
 
-    public Candidate(int id, String name, String desc, LocalDateTime date, boolean visible, City city) {
+//    public Candidate(int id, String name, String desc, LocalDateTime date, boolean visible, City city) {
+//        this.id = id;
+//        this.name = name;
+//        this.desc = desc;
+//        this.date = date;
+//        this.visible = visible;
+//        this.city = city;
+//    }
+
+    public Candidate(int id, String name, String desc, LocalDateTime date, boolean visible, City city, byte[] photo) {
         this.id = id;
         this.name = name;
         this.desc = desc;
         this.date = date;
         this.visible = visible;
         this.city = city;
+        this.photo = photo;
     }
 
     public int getId() {
@@ -70,6 +81,14 @@ public class Candidate implements Serializable {
 
     public void setCity(City city) {
         this.city = city;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
     }
 
     @Override

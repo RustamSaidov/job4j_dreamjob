@@ -19,9 +19,10 @@ public class CandidateStore {
     private static AtomicInteger id = new AtomicInteger();
 
     private CandidateStore() {
-        candidates.put(1, new Candidate(1, "Женя Иванов ", "Выпускник Geek brains", LocalDateTime.now(), true, new City(1, "Москва")));
-        candidates.put(2, new Candidate(2, "Миша Петров", "2 года работы в VK.com", LocalDateTime.now(), true, new City(1, "Москва")));
-        candidates.put(3, new Candidate(3, "Сидор Сидоров", "5 лет опыта работы в разных компаниях", LocalDateTime.now(), true, new City(1, "Москва")));
+//        candidates.put(1, new Candidate(1, "Женя Иванов ", "Выпускник Geek brains", LocalDateTime.now(), true, new City(1, "Москва")));
+//        candidates.put(2, new Candidate(2, "Миша Петров", "2 года работы в VK.com", LocalDateTime.now(), true, new City(1, "Москва")));
+//        candidates.put(3, new Candidate(3, "Сидор Сидоров", "5 лет опыта работы в разных компаниях", LocalDateTime.now(), true, new City(1, "Москва")));
+
     }
 
     public int getUniqueId() {
