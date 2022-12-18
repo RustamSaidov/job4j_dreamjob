@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.job4j.dreamjob.model.City;
 import ru.job4j.dreamjob.model.Post;
 import ru.job4j.dreamjob.store.CityStore;
+import ru.job4j.dreamjob.store.PostDBStore;
 import ru.job4j.dreamjob.store.PostStore;
 
 import java.util.Collection;
@@ -12,11 +13,12 @@ import java.util.Collection;
 @ThreadSafe
 @Service
 public class PostService {
-
-    private final PostStore store;
     private final CityStore cityStore;
 
-    public PostService(PostStore store, CityStore cityStore) {
+    private final PostDBStore store;
+
+
+    public PostService(PostDBStore store, CityStore cityStore) {
         this.store = store;
         this.cityStore = cityStore;
     }
