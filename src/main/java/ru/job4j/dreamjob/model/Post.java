@@ -7,21 +7,24 @@ import java.util.Objects;
 public class Post implements Serializable {
     private int id;
     private String name;
+    private City city;
     private String description;
     private LocalDateTime date;
     private boolean visible;
-    private City city;
+
 
     private Post() {
     }
 
-    public Post(int id, String name, String description, LocalDateTime date, boolean visible, City city) {
+    public Post(int id, String name, City city, String description, LocalDateTime date, boolean visible
+    ) {
         this.id = id;
         this.name = name;
+        this.city = city;
         this.description = description;
         this.date = date;
         this.visible = visible;
-        this.city = city;
+
     }
 
     public int getId() {

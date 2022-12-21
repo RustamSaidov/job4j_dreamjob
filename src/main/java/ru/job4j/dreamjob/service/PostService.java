@@ -1,4 +1,4 @@
-package ru.job4j.dreamjob.service;
+/*package ru.job4j.dreamjob.service;
 
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
@@ -6,29 +6,33 @@ import ru.job4j.dreamjob.model.City;
 import ru.job4j.dreamjob.model.Post;
 import ru.job4j.dreamjob.store.CityStore;
 import ru.job4j.dreamjob.store.PostDBStore;
-import ru.job4j.dreamjob.store.PostStore;
 
-import java.util.Collection;
+import java.util.List;
 
 @ThreadSafe
 @Service
 public class PostService {
-    private final CityStore cityStore;
-
     private final PostDBStore store;
+    private final CityService cityService;
 
 
-    public PostService(PostDBStore store, CityStore cityStore) {
+    public PostService(PostDBStore store, CityService cityService) {
         this.store = store;
-        this.cityStore = cityStore;
+        this.cityService = cityService;
     }
 
-    public Collection<Post> findAll() {
-        return store.findAll();
+    public List<Post> findAll() {
+        List<Post> posts = store.findAll();
+        posts.forEach(
+                post -> post.setCity(
+                        cityService.findById(post.getCity().getId())
+                )
+        );
+        return posts;
     }
 
     public void add(Post post) {
-        String cityName = cityStore.findById(post.getCity().getId()).getName();
+        String cityName = cityService.findById(post.getCity().getId()).getName();
         City city = new City(post.getCity().getId(), cityName);
         post.setCity(city);
         store.add(post);
@@ -38,8 +42,10 @@ public class PostService {
         return store.findById(id);
     }
 
-    public Post update(Post post) {
-        post.setCity(cityStore.findById(post.getCity().getId()));
-        return store.update(post);
+    public void update(Post post) {
+        post.setCity(cityService.findById(post.getCity().getId()));
     }
 }
+
+ */
+

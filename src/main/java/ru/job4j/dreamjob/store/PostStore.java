@@ -19,9 +19,11 @@ public class PostStore {
     private static AtomicInteger id = new AtomicInteger();
 
     private PostStore() {
+        /*
         posts.put(1, new Post(1, "Junior Java Job", "Работа для начинающего программиста", LocalDateTime.now(), true, new City(1, "Москва")));
         posts.put(2, new Post(2, "Middle Java Job", "Работа для опытного программиста", LocalDateTime.now(), true, new City(1, "Москва")));
         posts.put(3, new Post(3, "Senior Java Job", "Работа для кунг-фу программиста", LocalDateTime.now(), true, new City(1, "Москва")));
+         */
     }
 
     public int getUniqueId() {
