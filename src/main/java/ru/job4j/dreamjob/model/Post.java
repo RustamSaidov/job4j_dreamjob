@@ -9,20 +9,20 @@ public class Post implements Serializable {
     private String name;
     private City city;
     private String description;
-    private LocalDateTime date;
+    private LocalDateTime created;
     private boolean visible;
 
 
     private Post() {
     }
 
-    public Post(int id, String name, City city, String description, LocalDateTime date, boolean visible
+    public Post(int id, String name, City city, String description, LocalDateTime created, boolean visible
     ) {
         this.id = id;
         this.name = name;
         this.city = city;
         this.description = description;
-        this.date = date;
+        this.created = created;
         this.visible = visible;
 
     }
@@ -51,12 +51,12 @@ public class Post implements Serializable {
         this.description = description;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public LocalDateTime getCreated() {
+        return created;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
     }
 
     public boolean isVisible() {
