@@ -47,7 +47,7 @@ public class CandidateController {
     public String createCandidate(@ModelAttribute Candidate candidate,
                                   @RequestParam("file") MultipartFile file) throws IOException {
         candidate.setPhoto(file.getBytes());
-        candidate.setDate(LocalDateTime.now());
+        candidate.setCreated(LocalDateTime.now());
         candidateService.add(candidate);
         return "redirect:/candidates";
     }
@@ -63,7 +63,7 @@ public class CandidateController {
     public String updateCandidate(@ModelAttribute Candidate candidate,
                                   @RequestParam("file") MultipartFile file) throws IOException {
         candidate.setPhoto(file.getBytes());
-        candidate.setDate(LocalDateTime.now());
+        candidate.setCreated(LocalDateTime.now());
         candidateService.update(candidate);
         return "redirect:/candidates";
     }

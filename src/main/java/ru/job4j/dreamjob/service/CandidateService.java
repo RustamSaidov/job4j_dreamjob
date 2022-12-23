@@ -4,29 +4,35 @@ import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.dreamjob.model.Candidate;
 import ru.job4j.dreamjob.model.City;
-import ru.job4j.dreamjob.store.CandidateStore;
-import ru.job4j.dreamjob.store.CityStore;
+import ru.job4j.dreamjob.store.CandidateDBStore;
 
 import java.util.Collection;
+import java.util.List;
 
 @ThreadSafe
 @Service
 public class CandidateService {
 
-    private final CandidateStore store;
-    private final CityStore cityStore;
+    private final CandidateDBStore store;
+    private final CityService cityService;
 
-    public CandidateService(CandidateStore store, CityStore cityStore) {
+    public CandidateService(CandidateDBStore store, CityService cityService) {
         this.store = store;
-        this.cityStore = cityStore;
+        this.cityService = cityService;
     }
 
     public Collection<Candidate> findAll() {
-        return store.findAll();
+        List<Candidate> candidates = store.findAll();
+        candidates.forEach(
+                candidate -> candidate.setCity(
+                        cityService.findById(candidate.getCity().getId())
+                )
+        );
+        return candidates;
     }
 
     public void add(Candidate candidate) {
-        String cityName = cityStore.findById(candidate.getCity().getId()).getName();
+        String cityName = cityService.findById(candidate.getCity().getId()).getName();
         City city = new City(candidate.getCity().getId(), cityName);
         candidate.setCity(city);
         store.add(candidate);
@@ -36,8 +42,7 @@ public class CandidateService {
         return store.findById(id);
     }
 
-    public Candidate update(Candidate candidate) {
-        candidate.setCity(cityStore.findById(candidate.getCity().getId()));
-        return store.update(candidate);
+    public void update(Candidate candidate) {
+        store.update(candidate);
     }
 }

@@ -8,7 +8,7 @@ public class Candidate implements Serializable {
     private int id;
     private String name;
     private String desc;
-    private LocalDateTime date;
+    private LocalDateTime created;
     private boolean visible;
     private City city;
     private byte[] photo;
@@ -16,11 +16,11 @@ public class Candidate implements Serializable {
     private Candidate() {
     }
 
-    public Candidate(int id, String name, String desc, LocalDateTime date, boolean visible, City city, byte[] photo) {
+    public Candidate(int id, String name, String desc, LocalDateTime created, boolean visible, City city, byte[] photo) {
         this.id = id;
         this.name = name;
         this.desc = desc;
-        this.date = date;
+        this.created = created;
         this.visible = visible;
         this.city = city;
         this.photo = photo;
@@ -50,12 +50,12 @@ public class Candidate implements Serializable {
         this.desc = desc;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public LocalDateTime getCreated() {
+        return created;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
     }
 
     public boolean isVisible() {

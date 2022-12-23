@@ -43,7 +43,7 @@ public class PostService {
     }
 
     public void update(Post post) {
-        post.setCity(cityService.findById(post.getCity().getId()));
+        store.update(post);
     }
 }
 
