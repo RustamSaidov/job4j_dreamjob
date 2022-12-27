@@ -15,9 +15,10 @@ import java.util.List;
 public class PostDBStore {
 
     private final BasicDataSource pool;
+    private static final String TRUNCATE_TABLE_QUERY = "TRUNCATE TABLE post RESTART IDENTITY";
     private static final String SELECT_QUERY = "SELECT * FROM post";
     private static final String INSERT_QUERY = "INSERT INTO post(name, city_id , description, created, visible) VALUES (?,?,?,?,?)";
-    private static final String UPDATE_QUERY = "UPDATE post SET name = ?,city_id =?, description=?, date =?, visible =?  WHERE id = ?";
+    private static final String UPDATE_QUERY = "UPDATE post SET name = ?,city_id =?, description=?, created =?, visible =?  WHERE id = ?";
     private static final String FIND_BY_ID_QUERY = "SELECT * FROM post WHERE id = ?";
     private static final Logger LOG = LoggerFactory.getLogger(PostDBStore.class.getName());
 
@@ -40,6 +41,16 @@ public class PostDBStore {
             LOG.error("Exception in method findAll", e);
         }
         return posts;
+    }
+
+    public void TruncateTable() {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement(TRUNCATE_TABLE_QUERY)
+        ) {
+            ps.execute();
+        } catch (Exception e) {
+            LOG.error("Exception in method TruncateTable", e);
+        }
     }
 
 
@@ -106,7 +117,7 @@ public class PostDBStore {
                 it.getString("name"),
                 new City(it.getInt("city_id")),
                 it.getString("description"),
-                it.getTimestamp("date").toLocalDateTime(),
+                it.getTimestamp("created").toLocalDateTime(),
                 it.getBoolean("visible"));
     }
 }

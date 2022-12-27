@@ -2,12 +2,13 @@ package ru.job4j.dreamjob.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Candidate implements Serializable {
     private int id;
     private String name;
-    private String desc;
+    private String description;
     private LocalDateTime created;
     private boolean visible;
     private City city;
@@ -16,10 +17,10 @@ public class Candidate implements Serializable {
     private Candidate() {
     }
 
-    public Candidate(int id, String name, String desc, LocalDateTime created, boolean visible, City city, byte[] photo) {
+    public Candidate(int id, String name, String description, LocalDateTime created, boolean visible, City city, byte[] photo) {
         this.id = id;
         this.name = name;
-        this.desc = desc;
+        this.description = description;
         this.created = created;
         this.visible = visible;
         this.city = city;
@@ -42,12 +43,12 @@ public class Candidate implements Serializable {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public LocalDateTime getCreated() {
@@ -97,5 +98,18 @@ public class Candidate implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(getId());
+    }
+
+    @Override
+    public String toString() {
+        return "Candidate{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", created=" + created +
+                ", visible=" + visible +
+                ", city=" + city +
+                ", photo=" + Arrays.toString(photo) +
+                '}';
     }
 }

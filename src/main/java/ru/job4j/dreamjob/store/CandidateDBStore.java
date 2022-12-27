@@ -15,16 +15,16 @@ import java.util.List;
 public class CandidateDBStore {
 
     private final BasicDataSource pool;
+    private static final String TRUNCATE_TABLE_QUERY = "TRUNCATE TABLE candidate RESTART IDENTITY";
     private static final String SELECT_QUERY = "SELECT * FROM candidate";
-    private static final String INSERT_QUERY = "INSERT INTO candidate(name, city_id , desc, created, visible, photo) VALUES (?,?,?,?,?,?)";
-    private static final String UPDATE_QUERY = "UPDATE candidate SET name = ?,city_id =?, description=?, date =?, visible =?, photo =?  WHERE id = ?";
+    private static final String INSERT_QUERY = "INSERT INTO candidate(name, city_id , description, created, visible, photo) VALUES (?,?,?,?,?,?)";
+    private static final String UPDATE_QUERY = "UPDATE candidate SET name = ?,city_id =?, description=?, created =?, visible =?, photo =?  WHERE id = ?";
     private static final String FIND_BY_ID_QUERY = "SELECT * FROM candidate WHERE id = ?";
-    private static final Logger LOG = LoggerFactory.getLogger(PostDBStore.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(CandidateDBStore.class.getName());
 
     public CandidateDBStore(BasicDataSource pool) {
         this.pool = pool;
     }
-
 
     public List<Candidate> findAll() {
         List<Candidate> candidates = new ArrayList<>();
@@ -42,6 +42,15 @@ public class CandidateDBStore {
         return candidates;
     }
 
+    public void TruncateTable() {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement(TRUNCATE_TABLE_QUERY)
+        ) {
+            ps.execute();
+        } catch (Exception e) {
+            LOG.error("Exception in method TruncateTable", e);
+        }
+    }
 
     public Candidate add(Candidate candidate) {
         try (Connection cn = pool.getConnection();
@@ -49,7 +58,7 @@ public class CandidateDBStore {
         ) {
             ps.setString(1, candidate.getName());
             ps.setInt(2, candidate.getCity().getId());
-            ps.setString(3, candidate.getDesc());
+            ps.setString(3, candidate.getDescription());
             ps.setTimestamp(4, Timestamp.valueOf(candidate.getCreated()));
             ps.setBoolean(5, candidate.isVisible());
             ps.setBytes(6, candidate.getPhoto());
@@ -71,7 +80,7 @@ public class CandidateDBStore {
         ) {
             ps.setString(1, candidate.getName());
             ps.setInt(2, candidate.getCity().getId());
-            ps.setString(3, candidate.getDesc());
+            ps.setString(3, candidate.getDescription());
             ps.setTimestamp(4, Timestamp.valueOf(candidate.getCreated()));
             ps.setBoolean(5, candidate.isVisible());
             ps.setBytes(6, candidate.getPhoto());
@@ -106,8 +115,8 @@ public class CandidateDBStore {
     private Candidate getCandidate(ResultSet it) throws SQLException {
         return new Candidate(it.getInt("id"),
                 it.getString("name"),
-                it.getString("desc"),
-                it.getTimestamp("date").toLocalDateTime(),
+                it.getString("description"),
+                it.getTimestamp("created").toLocalDateTime(),
                 it.getBoolean("visible"),
                 new City(it.getInt("city_id")),
                 it.getBytes("photo"));
