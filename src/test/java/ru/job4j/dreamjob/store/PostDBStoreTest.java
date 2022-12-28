@@ -1,7 +1,8 @@
 package ru.job4j.dreamjob.store;
 
-import org.junit.Test;
-/*import org.junit.jupiter.api.BeforeEach;*/
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import ru.job4j.dreamjob.Main;
 import ru.job4j.dreamjob.model.Post;
 import ru.job4j.dreamjob.model.City;
@@ -32,7 +33,8 @@ public class PostDBStoreTest {
         Post updatedPost2InDb = store.findById(updatedPost2.getId());
         assertThat(updatedPost2InDb.getName(), is(updatedPost2.getName()));
     }
-/*
+
+    /*
     @BeforeEach
     public void truncateTable() {
         CandidateDBStore store = new CandidateDBStore(new Main().loadPool());
@@ -43,7 +45,6 @@ public class PostDBStoreTest {
     @Test
     public void whenCreatePost() {
         PostDBStore store = new PostDBStore(new Main().loadPool());
-        store.truncateTable();
         Post post = new Post(1, "Junior Java Job", new City(1, "Москва"), "Работа для начинающего программиста", LocalDateTime.now(), true);
         store.add(post);
         Post postInDb = store.findById(post.getId());
@@ -53,7 +54,6 @@ public class PostDBStoreTest {
     @Test
     public void whenUpdatePost() {
         PostDBStore store = new PostDBStore(new Main().loadPool());
-        store.truncateTable();
         Post post = new Post(1, "Junior Java Job", new City(1, "Москва"), "Работа для начинающего программиста", LocalDateTime.now(), true);
         store.add(post);
         Post updatedPost = new Post(1, "Middle Java Job", new City(1, "Москва"), "Работа для начинающего программиста", LocalDateTime.now(), true);
@@ -65,7 +65,6 @@ public class PostDBStoreTest {
     @Test
     public void whenFindAllPosts() {
         PostDBStore store = new PostDBStore(new Main().loadPool());
-        store.truncateTable();
         byte[] photo = new byte[]{};
         Post post1 = new Post(1, "Junior Java Job", new City(1, "Москва"), "Работа для начинающего программиста", LocalDateTime.now(), true);
         Post post2 = new Post(2, "Middle Java Job", new City(1, "Москва"), "Работа для начинающего программиста", LocalDateTime.now(), true);
@@ -77,5 +76,5 @@ public class PostDBStoreTest {
         List<Post> postListFromDb = store.findAll();
         assertThat(postList, is(postListFromDb));
     }
- */
+     */
 }
