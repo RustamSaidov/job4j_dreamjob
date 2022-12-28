@@ -37,7 +37,6 @@ public class CandidateDBStoreTest {
         assertThat(updatedCandidate2InDb.getName(), is(updatedCandidate2.getName()));
     }
 /*
-
     @BeforeEach
     public void truncateTable() {
         CandidateDBStore store = new CandidateDBStore(new Main().loadPool());

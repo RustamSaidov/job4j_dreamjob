@@ -2,7 +2,6 @@ package ru.job4j.dreamjob.store;
 
 import org.junit.Test;
 /*import org.junit.jupiter.api.BeforeEach;*/
-//import org.junit.jupiter.api.BeforeEach;
 import ru.job4j.dreamjob.Main;
 import ru.job4j.dreamjob.model.Post;
 import ru.job4j.dreamjob.model.City;
