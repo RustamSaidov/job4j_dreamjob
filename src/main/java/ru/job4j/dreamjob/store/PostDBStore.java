@@ -43,7 +43,7 @@ public class PostDBStore {
         return posts;
     }
 
-    public void TruncateTable() {
+    public void truncateTable() {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(TRUNCATE_TABLE_QUERY)
         ) {
