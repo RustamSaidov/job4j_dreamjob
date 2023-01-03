@@ -3,6 +3,7 @@ package ru.job4j.dreamjob.controller;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.job4j.dreamjob.model.User;
@@ -27,5 +28,10 @@ public class UserController {
             return "redirect:/fail";
         }
         return "redirect:/success";
+    }
+
+    @GetMapping("/formAddUser")
+    public String addPost(Model model) {
+        return "addUser";
     }
 }
