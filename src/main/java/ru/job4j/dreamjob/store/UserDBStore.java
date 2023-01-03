@@ -22,6 +22,7 @@ public class UserDBStore {
     private static final String INSERT_QUERY = "INSERT INTO user(email, password) VALUES (?,?)";
     private static final String UPDATE_QUERY = "UPDATE user SET email = ?,password =?  WHERE id = ?";
     private static final String FIND_BY_ID_QUERY = "SELECT * FROM user WHERE id = ?";
+    private static final String FIND_BY_EMAIL_AND_PASSWORD_QUERY = "SELECT * FROM user WHERE email = ?, password = ?";
     private static final Logger LOG = LoggerFactory.getLogger(UserDBStore.class.getName());
 
     public UserDBStore(BasicDataSource pool) {
@@ -104,6 +105,23 @@ public class UserDBStore {
             }
         } catch (Exception e) {
             LOG.error("Exception in method findById", e);
+        }
+        return null;
+    }
+
+    public Optional<User> findUserByEmailAndPassword(String email, String password) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement(FIND_BY_EMAIL_AND_PASSWORD_QUERY)
+        ) {
+            ps.setString(1, email);
+            ps.setString(2, password);
+            try (ResultSet it = ps.executeQuery()) {
+                if (it.next()) {
+                    return Optional.of(getUser(it));
+                }
+            }
+        } catch (Exception e) {
+            LOG.error("Exception in method findUserByEmailAndPassword", e);
         }
         return null;
     }
