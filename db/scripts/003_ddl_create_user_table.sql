@@ -1,5 +1,7 @@
-CREATE TABLE users (
-  id SERIAL PRIMARY KEY,
-  email TEXT UNIQUE,
-  password TEXT
+CREATE TABLE users
+(
+    id       SERIAL PRIMARY KEY,
+    email    varchar unique not null,
+    name     varchar        not null,
+    password varchar        not null
 );

@@ -1,4 +1,4 @@
-package ru.job4j.dreamjob.service;
+/*package ru.job4j.dreamjob.service;
 
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class UserService {
         return store.findAll();
     }
 
-    public Optional<User> add(User user) {
+    public Optional<User> save(User user) {
         return store.add(user);
     }
 
@@ -37,3 +37,5 @@ public class UserService {
         store.update(user);
     }
 }
+
+ */

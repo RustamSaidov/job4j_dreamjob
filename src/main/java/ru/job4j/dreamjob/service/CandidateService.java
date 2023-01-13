@@ -1,4 +1,4 @@
-package ru.job4j.dreamjob.service;
+/*package ru.job4j.dreamjob.service;
 
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
@@ -46,3 +46,5 @@ public class CandidateService {
         store.update(candidate);
     }
 }
+
+ */

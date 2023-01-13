@@ -1,4 +1,4 @@
-package ru.job4j.dreamjob.controller;
+/*package ru.job4j.dreamjob.controller;
 
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Controller;
@@ -59,3 +59,5 @@ public class PostController {
         return "redirect:/posts";
     }
 }
+
+ */

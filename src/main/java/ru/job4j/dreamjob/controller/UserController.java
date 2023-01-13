@@ -1,4 +1,4 @@
-package ru.job4j.dreamjob.controller;
+/*package ru.job4j.dreamjob.controller;
 
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Controller;
@@ -21,14 +21,14 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/registration")
-    public String registration(Model model, @ModelAttribute User user) {
-        Optional<User> regUser = userService.add(user);
-        if (regUser.isEmpty()) {
+    @PostMapping("/register")
+    public String register(Model model, @ModelAttribute User user) {
+        var savedUser = userService.save(user);
+        if (savedUser.isEmpty()) {
             model.addAttribute("message", "Пользователь с такой почтой уже существует");
-            return "redirect:/fail";
+            return "errors/404";
         }
-        return "redirect:/success";
+        return "redirect:/vacancies";
     }
 
     @GetMapping("/formAddUser")
@@ -53,3 +53,5 @@ public class UserController {
         return "redirect:/index";
     }
 }
+
+ */

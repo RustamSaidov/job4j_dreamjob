@@ -1,4 +1,4 @@
-package ru.job4j.dreamjob.store;
+/*package ru.job4j.dreamjob.store;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
@@ -122,3 +122,5 @@ public class CandidateDBStore {
                 it.getBytes("photo"));
     }
 }
+
+ */
