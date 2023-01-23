@@ -1,4 +1,4 @@
-package ru.job4j.dreamjob.model;
+/*package ru.job4j.dreamjob.model;
 
 import java.util.Objects;
 
@@ -55,3 +55,5 @@ public class City {
                 '}';
     }
 }
+
+ */

@@ -1,4 +1,4 @@
-package ru.job4j.dreamjob.model;
+/*package ru.job4j.dreamjob.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -104,3 +104,5 @@ public class Post implements Serializable {
                 '}';
     }
 }
+
+ */
