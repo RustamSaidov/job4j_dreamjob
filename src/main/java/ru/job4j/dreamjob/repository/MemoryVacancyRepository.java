@@ -19,12 +19,12 @@ public class MemoryVacancyRepository implements VacancyRepository {
     private final Map<Integer, Vacancy> vacancies = new HashMap<>();
 
     public MemoryVacancyRepository() {
-        save(new Vacancy(0, "Intern Java Developer", "Great job for cash1", LocalDateTime.now(), true));
-        save(new Vacancy(0, "Junior Java Developer", "Great job for cash2", LocalDateTime.now(), true));
-        save(new Vacancy(0, "Junior+ Java Developer", "Great job for cash3", LocalDateTime.now(), true));
-        save(new Vacancy(0, "Middle Java Developer", "Great job for cash4", LocalDateTime.now(), false));
-        save(new Vacancy(0, "Middle+ Java Developer", "Great job for cash5", LocalDateTime.now(), false));
-        save(new Vacancy(0, "Senior Java Developer", "Great job for cash6", LocalDateTime.now(), false));
+        save(new Vacancy(0, "Intern Java Developer", "Great job for cash1", LocalDateTime.now(), true, 1));
+        save(new Vacancy(0, "Junior Java Developer", "Great job for cash2", LocalDateTime.now(), true, 1));
+        save(new Vacancy(0, "Junior+ Java Developer", "Great job for cash3", LocalDateTime.now(), true, 2));
+        save(new Vacancy(0, "Middle Java Developer", "Great job for cash4", LocalDateTime.now(), false, 2));
+        save(new Vacancy(0, "Middle+ Java Developer", "Great job for cash5", LocalDateTime.now(), false, 3));
+        save(new Vacancy(0, "Senior Java Developer", "Great job for cash6", LocalDateTime.now(), false, 3));
     }
 
     @Override
@@ -42,7 +42,7 @@ public class MemoryVacancyRepository implements VacancyRepository {
     @Override
     public boolean update(Vacancy vacancy) {
         return vacancies.computeIfPresent(vacancy.getId(), (id, oldVacancy) -> {
-            return new Vacancy(oldVacancy.getId(), vacancy.getTitle(), vacancy.getDescription(), vacancy.getCreationDate(), vacancy.getVisible());
+            return new Vacancy(oldVacancy.getId(), vacancy.getTitle(), vacancy.getDescription(), vacancy.getCreationDate(), vacancy.getVisible(), vacancy.getCityId());
         }) != null;
     }
 
