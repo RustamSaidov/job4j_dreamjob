@@ -8,16 +8,26 @@ public class Candidate implements Serializable {
     private int id;
     private String name;
     private String description;
-    private LocalDateTime creationDate;
+    private LocalDateTime creationDate = LocalDateTime.now();
+    private boolean visible;
 
-    private Candidate() {
+    public Candidate() {
     }
 
-    public Candidate(int id, String name, String description, LocalDateTime creationDate ) {
+    public Candidate(int id, String name, String description, LocalDateTime creationDate, boolean visible ) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.creationDate = creationDate ;
+        this.visible = visible;
+    }
+
+    public boolean getVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 
     public int getId() {

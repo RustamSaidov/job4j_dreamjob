@@ -1,5 +1,7 @@
 package ru.job4j.dreamjob.repository;
 
+import net.jcip.annotations.ThreadSafe;
+import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.Vacancy;
 
 import java.time.LocalDateTime;
@@ -8,25 +10,21 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+@ThreadSafe
+@Repository
 public class MemoryVacancyRepository implements VacancyRepository {
-
-    private static final MemoryVacancyRepository INSTANCE = new MemoryVacancyRepository();
 
     private int nextId = 1;
 
     private final Map<Integer, Vacancy> vacancies = new HashMap<>();
 
     public MemoryVacancyRepository() {
-        save(new Vacancy(0, "Intern Java Developer", "Great job for cash1", LocalDateTime.now()));
-        save(new Vacancy(0, "Junior Java Developer", "Great job for cash2", LocalDateTime.now()));
-        save(new Vacancy(0, "Junior+ Java Developer", "Great job for cash3", LocalDateTime.now()));
-        save(new Vacancy(0, "Middle Java Developer", "Great job for cash4", LocalDateTime.now()));
-        save(new Vacancy(0, "Middle+ Java Developer", "Great job for cash5", LocalDateTime.now()));
-        save(new Vacancy(0, "Senior Java Developer", "Great job for cash6", LocalDateTime.now()));
-    }
-
-    public static MemoryVacancyRepository getInstance() {
-        return INSTANCE;
+        save(new Vacancy(0, "Intern Java Developer", "Great job for cash1", LocalDateTime.now(), true));
+        save(new Vacancy(0, "Junior Java Developer", "Great job for cash2", LocalDateTime.now(), true));
+        save(new Vacancy(0, "Junior+ Java Developer", "Great job for cash3", LocalDateTime.now(), true));
+        save(new Vacancy(0, "Middle Java Developer", "Great job for cash4", LocalDateTime.now(), false));
+        save(new Vacancy(0, "Middle+ Java Developer", "Great job for cash5", LocalDateTime.now(), false));
+        save(new Vacancy(0, "Senior Java Developer", "Great job for cash6", LocalDateTime.now(), false));
     }
 
     @Override
@@ -43,9 +41,12 @@ public class MemoryVacancyRepository implements VacancyRepository {
 
     @Override
     public boolean update(Vacancy vacancy) {
-        return vacancies.computeIfPresent(vacancy.getId(), (id, oldVacancy) -> new Vacancy(oldVacancy.getId(),
-                vacancy.getTitle(), vacancy.getDescription(), vacancy.getCreationDate())) != null;
+        return vacancies.computeIfPresent(vacancy.getId(), (id, oldVacancy) -> {
+            return new Vacancy(oldVacancy.getId(), vacancy.getTitle(), vacancy.getDescription(), vacancy.getCreationDate(), vacancy.getVisible());
+        }) != null;
     }
+
+
 
     @Override
     public Optional<Vacancy> findById(int id) {
