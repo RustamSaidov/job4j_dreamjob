@@ -1,4 +1,4 @@
-/*package ru.job4j.dreamjob.repository;
+package ru.job4j.dreamjob.repository;
 
 import org.springframework.stereotype.Repository;
 import org.sql2o.Sql2o;
@@ -46,5 +46,3 @@ public class Sql2oFileRepository implements FileRepository {
     }
 
 }
-
- */
