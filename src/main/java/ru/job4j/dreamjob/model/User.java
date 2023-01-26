@@ -1,16 +1,26 @@
-/*package ru.job4j.dreamjob.model;
+package ru.job4j.dreamjob.model;
 
 import java.io.Serializable;
+import java.util.Map;
 import java.util.Objects;
 
 public class User implements Serializable {
+
+    public static final Map<String, String> COLUMN_MAPPING = Map.of(
+            "id", "id",
+            "email", "email",
+            "name", "name",
+            "password", "password"
+    );
     private int id;
     private String email;
+    private String name;
     private String password;
 
-    public User(int id, String email, String password) {
+    public User(int id, String email, String name, String password) {
         this.id = id;
         this.email = email;
+        this.name = name;
         this.password = password;
     }
 
@@ -30,6 +40,14 @@ public class User implements Serializable {
         this.email = email;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -37,28 +55,4 @@ public class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
-        User user = (User) o;
-        return getId() == user.getId();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
 }
-
- */
