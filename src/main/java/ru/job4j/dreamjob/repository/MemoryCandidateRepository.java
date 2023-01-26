@@ -13,19 +13,19 @@ import java.util.Optional;
 
 @ThreadSafe
 @Repository
-public class MemoryCandidateRepository implements CandidateRepository{
+public class MemoryCandidateRepository implements CandidateRepository {
 
     private int nextId = 1;
 
     private final Map<Integer, Candidate> candidates = new HashMap<>();
 
     public MemoryCandidateRepository() {
-        save(new Candidate(0,"John", "junior java developer", LocalDateTime.now(), true, 1,0));
-        save(new Candidate(0,"Phil", "middle java developer", LocalDateTime.now(), true, 1,0));
-        save(new Candidate(0,"Tony", "junior java developer", LocalDateTime.now(), true, 1,0));
-        save(new Candidate(0,"Mike", "middle java developer", LocalDateTime.now(), true, 1,0));
-        save(new Candidate(0,"Chris", "junior java developer", LocalDateTime.now(), true, 1,0));
-        save(new Candidate(0,"John", "middle java developer", LocalDateTime.now(), true, 1,0));
+        save(new Candidate(0, "John", "junior java developer", LocalDateTime.now(), true, 1, 0));
+        save(new Candidate(0, "Phil", "middle java developer", LocalDateTime.now(), true, 1, 0));
+        save(new Candidate(0, "Tony", "junior java developer", LocalDateTime.now(), true, 1, 0));
+        save(new Candidate(0, "Mike", "middle java developer", LocalDateTime.now(), true, 1, 0));
+        save(new Candidate(0, "Chris", "junior java developer", LocalDateTime.now(), true, 1, 0));
+        save(new Candidate(0, "John", "middle java developer", LocalDateTime.now(), true, 1, 0));
     }
 
     @Override
@@ -44,7 +44,7 @@ public class MemoryCandidateRepository implements CandidateRepository{
     public boolean update(Candidate candidate) {
         return candidates.computeIfPresent(candidate.getId(), (id, oldCandidate) -> {
             return new Candidate(oldCandidate.getId(), candidate.getName(), candidate.getDescription(),
-                    candidate.getCreationDate(), candidate.getVisible(), candidate.getCityId(),candidate.getFileId());
+                    candidate.getCreationDate(), candidate.getVisible(), candidate.getCityId(), candidate.getFileId());
         }) != null;
     }
 

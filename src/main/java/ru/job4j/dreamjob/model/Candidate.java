@@ -27,14 +27,14 @@ public class Candidate implements Serializable {
     public Candidate() {
     }
 
-    public Candidate(int id, String name, String description, LocalDateTime creationDate, boolean visible, int cityId, int fileId ) {
+    public Candidate(int id, String name, String description, LocalDateTime creationDate, boolean visible, int cityId, int fileId) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.creationDate = creationDate ;
+        this.creationDate = creationDate;
         this.visible = visible;
         this.cityId = cityId;
-        this.fileId =  fileId;
+        this.fileId = fileId;
     }
 
     public int getFileId() {
@@ -112,12 +112,12 @@ public class Candidate implements Serializable {
 
     @Override
     public String toString() {
-        return "Candidate{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", created=" + creationDate +
-                '}';
+        return "Candidate{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", description='" + description + '\''
+                + ", created=" + creationDate
+                + '}';
     }
 }
 

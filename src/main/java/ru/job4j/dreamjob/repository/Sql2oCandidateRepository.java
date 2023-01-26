@@ -3,7 +3,6 @@ package ru.job4j.dreamjob.repository;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Sql2o;
 import ru.job4j.dreamjob.model.Candidate;
-import ru.job4j.dreamjob.model.Vacancy;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -21,9 +20,9 @@ public class Sql2oCandidateRepository implements CandidateRepository {
     public Candidate save(Candidate candidate) {
         try (var connection = sql2o.open()) {
             var sql = """
-                      INSERT INTO candidates(name, description, creation_date, visible, city_id, file_id)
-                      VALUES (:name, :description, :creationDate, :visible, :cityId, :fileId)
-                      """;
+                    INSERT INTO candidates(name, description, creation_date, visible, city_id, file_id)
+                    VALUES (:name, :description, :creationDate, :visible, :cityId, :fileId)
+                    """;
             var query = connection.createQuery(sql, true)
                     .addParameter("name", candidate.getName())
                     .addParameter("description", candidate.getDescription())

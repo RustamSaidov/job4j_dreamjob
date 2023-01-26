@@ -86,7 +86,6 @@ public class CandidateController {
 }
 
 
-
 //package ru.job4j.dreamjob.controller;
 //
 //import net.jcip.annotations.ThreadSafe;
