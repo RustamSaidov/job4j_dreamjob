@@ -1,18 +1,13 @@
 package ru.job4j.dreamjob.repository;
 
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import ru.job4j.dreamjob.configuration.DatasourceConfiguration;
-import ru.job4j.dreamjob.model.File;
 import ru.job4j.dreamjob.model.User;
-import ru.job4j.dreamjob.model.Vacancy;
 
-import java.time.temporal.ChronoUnit;
 import java.util.Properties;
 
-import static java.time.LocalDateTime.now;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Sql2oUserRepositoryTest {
