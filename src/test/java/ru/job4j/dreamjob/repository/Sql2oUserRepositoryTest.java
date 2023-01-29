@@ -40,8 +40,20 @@ public class Sql2oUserRepositoryTest {
 
     @Test
     public void whenSaveThenGetSame() {
-        var user = sql2oUserRepository.save(new User(0, "ivan@mail.ru", "Ivan", "12345"));
-        var savedUser = sql2oUserRepository.findByEmailAndPassword(user.get().getEmail(), user.get().getPassword());
+        var optionalUser = sql2oUserRepository.save(new User(0, "ivan@mail.ru", "Ivan", "12345"));
+        var user = optionalUser.get();
+        var savedUser = sql2oUserRepository.findByEmailAndPassword(user.getEmail(), user.getPassword()).get();
         assertThat(savedUser).usingRecursiveComparison().isEqualTo(user);
+    }
+
+
+    @Test
+    public void whenSaveTwoTimesSameUser() {
+        User user = new User(0, "ivan@mail.ru", "Ivan", "12345");
+        var savedUser = sql2oUserRepository.save(user);
+        assertThat(savedUser.get()).usingRecursiveComparison().isEqualTo(user);
+        var againSavedUser = sql2oUserRepository.save(user);
+        assertThat(againSavedUser).isEmpty();
+
     }
 }
