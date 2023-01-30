@@ -31,13 +31,11 @@ public class Sql2oUserRepository implements UserRepository {
                     .addParameter("name", user.getName())
                     .addParameter("password", user.getPassword());
 
-            try {
-                int generatedId = query.executeUpdate().getKey(Integer.class);
-                user.setId(generatedId);
-                optionalUser = Optional.of(user);
-            } catch (Exception e) {
-                optionalUser = Optional.empty();
-            }
+            int generatedId = query.executeUpdate().getKey(Integer.class);
+            user.setId(generatedId);
+            optionalUser = Optional.of(user);
+        } catch (Exception e) {
+            optionalUser = Optional.empty();
         }
         return optionalUser;
     }
