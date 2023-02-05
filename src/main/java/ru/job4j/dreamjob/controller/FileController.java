@@ -17,6 +17,7 @@ public class FileController {
         this.fileService = fileService;
     }
 
+    /*Оттестено*/
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable int id) {
         var contentOptional = fileService.getFileById(id);

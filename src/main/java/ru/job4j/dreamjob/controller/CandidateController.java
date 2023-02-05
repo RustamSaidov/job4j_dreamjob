@@ -24,18 +24,21 @@ public class CandidateController {
         this.cityService = cityService;
     }
 
+    /*Оттестено*/
     @GetMapping
     public String getAll(Model model) {
         model.addAttribute("candidates", candidateService.findAll());
         return "candidates/list";
     }
 
+    /*Оттестено*/
     @GetMapping("/create")
     public String getCreationPage(Model model) {
         model.addAttribute("cities", cityService.findAll());
         return "candidates/create";
     }
 
+    /*Оттестено*/
     @PostMapping("/create")
     public String create(@ModelAttribute Candidate candidate, @RequestParam MultipartFile file, Model model) {
         try {
@@ -47,6 +50,7 @@ public class CandidateController {
         }
     }
 
+    /*Оттестено*/
     @GetMapping("/{id}")
     public String getById(Model model, @PathVariable int id) {
         var candidateOptional = candidateService.findById(id);
@@ -59,6 +63,7 @@ public class CandidateController {
         return "candidates/one";
     }
 
+    /*Оттестено*/
     @PostMapping("/update")
     public String update(@ModelAttribute Candidate candidate, @RequestParam MultipartFile file, Model model) {
         try {
@@ -74,6 +79,7 @@ public class CandidateController {
         }
     }
 
+    /*Оттестено*/
     @GetMapping("/delete/{id}")
     public String delete(Model model, @PathVariable int id) {
         var isDeleted = candidateService.deleteById(id);

@@ -25,7 +25,7 @@ public class FileControllerTest {
     public void initServices() {
         fileService = mock(FileService.class);
         fileController = new FileController(fileService);
-        testFile = new MockMultipartFile("testFile.img", new byte[] {1, 2, 3});
+        testFile = new MockMultipartFile("testFile.img", new byte[]{1, 2, 3});
     }
 
     @Test
@@ -35,6 +35,16 @@ public class FileControllerTest {
 
         var actualFileDtoInBytes = fileController.getById(1);
 
-        assertThat(new byte[] {1, 2, 3}).isEqualTo(actualFileDtoInBytes.getBody());
+        assertThat(new byte[]{1, 2, 3}).isEqualTo(actualFileDtoInBytes.getBody());
+    }
+
+    @Test
+    public void whenRequestFileByIdThenNotFoundFile() throws Exception {
+        var fileDto = new FileDto(testFile.getOriginalFilename(), testFile.getBytes());
+        when(fileService.getFileById(1)).thenReturn(Optional.empty());
+
+        var actualFileDtoInBytes = fileController.getById(1);
+
+        assertThat(actualFileDtoInBytes.getBody()).isNull();
     }
 }

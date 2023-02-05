@@ -24,19 +24,21 @@ public class VacancyController {
         this.cityService = cityService;
     }
 
+    /*Оттестено*/
     @GetMapping
     public String getAll(Model model) {
         model.addAttribute("vacancies", vacancyService.findAll());
         return "vacancies/list";
     }
 
-
+    /*Оттестено*/
     @GetMapping("/create")
     public String getCreationPage(Model model) {
         model.addAttribute("cities", cityService.findAll());
         return "vacancies/create";
     }
 
+    /*Оттестено*/
     @PostMapping("/create")
     public String create(@ModelAttribute Vacancy vacancy, @RequestParam MultipartFile file, Model model) {
         try {
@@ -57,6 +59,7 @@ public class VacancyController {
         return "redirect:/vacancies";
     }*/
 
+    /*Оттестено*/
     @GetMapping("/{id}")
     public String getById(Model model, @PathVariable int id) {
         var vacancyOptional = vacancyService.findById(id);
@@ -69,6 +72,7 @@ public class VacancyController {
         return "vacancies/one";
     }
 
+    /*Оттестено*/
     @PostMapping("/update")
     public String update(@ModelAttribute Vacancy vacancy, @RequestParam MultipartFile file, Model model) {
         try {
@@ -84,6 +88,7 @@ public class VacancyController {
         }
     }
 
+    /*Оттестено*/
     @GetMapping("/delete/{id}")
     public String delete(Model model, @PathVariable int id) {
         var isDeleted = vacancyService.deleteById(id);

@@ -1,6 +1,5 @@
 package ru.job4j.dreamjob.controller;
 
-import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -13,8 +12,8 @@ import ru.job4j.dreamjob.model.City;
 import ru.job4j.dreamjob.service.CandidateService;
 import ru.job4j.dreamjob.service.CityService;
 
-
 import java.util.List;
+import java.util.Optional;
 
 import static java.time.LocalDateTime.now;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -36,7 +35,7 @@ public class CandidateControllerTest {
         candidateService = mock(CandidateService.class);
         cityService = mock(CityService.class);
         candidateController = new CandidateController(candidateService, cityService);
-        testFile = new MockMultipartFile("testFile.img", new byte[] {1, 2, 3});
+        testFile = new MockMultipartFile("testFile.img", new byte[]{1, 2, 3});
     }
 
     @Test
@@ -56,8 +55,8 @@ public class CandidateControllerTest {
 
     @Test
     public void whenRequestCandidatesCreationPageThenGetPageWithCities() {
-        var city1 = new City(1, "������");
-        var city2 = new City(2, "�����-���������");
+        var city1 = new City(1, "Москва");
+        var city2 = new City(2, "Санкт-Петербург");
         var expectedCities = List.of(city1, city2);
         when(cityService.findAll()).thenReturn(expectedCities);
 
@@ -100,5 +99,85 @@ public class CandidateControllerTest {
         assertThat(view).isEqualTo("errors/404");
         assertThat(actualExceptionMessage).isEqualTo(expectedException.getMessage());
     }
+
+    @Test
+    public void whenGetCandidateByIdThenCandidateNotFoundError() {
+        when(candidateService.findById(1)).thenReturn(Optional.empty());
+
+
+        var model = new ConcurrentModel();
+        var view = candidateController.getById(model, 1);
+        var actualMessage = model.getAttribute("message");
+
+        assertThat(view).isEqualTo("errors/404");
+        assertThat(actualMessage).isEqualTo("Кандидат с указанным идентификатором не найден");
+    }
+
+    @Test
+    public void whenGetCandidateByIdThenGetCandidateAndReturnCandidateOne() {
+        var candidate = new Candidate(1, "test1", "desc1", now(), true, 1, 2);
+        when(candidateService.findById(1)).thenReturn(Optional.of(candidate));
+
+
+        var model = new ConcurrentModel();
+        var view = candidateController.getById(model, 1);
+        var actualVacancy = model.getAttribute("candidate");
+
+        assertThat(view).isEqualTo("candidates/one");
+        assertThat(actualVacancy).isEqualTo(candidate);
+    }
+
+    @Test
+    public void whenUpdateCandidateThenReturnTrueAndRedirectToCandidates() {
+        var candidate = new Candidate(1, "test123", "desc1", now(), true, 1, 2);
+        var candidateArgumentCaptor = ArgumentCaptor.forClass(Candidate.class);
+        var fileDtoArgumentCaptor = ArgumentCaptor.forClass(FileDto.class);
+        when(candidateService.update(candidateArgumentCaptor.capture(), fileDtoArgumentCaptor.capture())).thenReturn(true);
+
+        var model = new ConcurrentModel();
+        var view = candidateController.update(candidate, testFile, model);
+        var actualCandidate = candidateArgumentCaptor.getValue();
+
+        assertThat(view).isEqualTo("redirect:/candidates");
+        assertThat(actualCandidate.getName()).isEqualTo(candidate.getName());
+    }
+
+    @Test
+    public void whenUpdateCandidateThenReturnErrorPage() {
+        var candidate = new Candidate(1, "test1", "desc1", now(), true, 1, 2);
+        var candidateArgumentCaptor = ArgumentCaptor.forClass(Candidate.class);
+        var fileDtoArgumentCaptor = ArgumentCaptor.forClass(FileDto.class);
+        when(candidateService.update(candidateArgumentCaptor.capture(), fileDtoArgumentCaptor.capture())).thenReturn(false);
+
+        var model = new ConcurrentModel();
+        var view = candidateController.update(candidate, testFile, model);
+        var actualMessage = model.getAttribute("message");
+
+        assertThat(view).isEqualTo("errors/404");
+        assertThat(actualMessage).isEqualTo("Кандидат с указанным идентификатором не найден");
+    }
+
+    @Test
+    public void whenDeleteCandidateThenRedirectToCandidates() {
+        when(candidateService.deleteById(1)).thenReturn(true);
+
+        var model = new ConcurrentModel();
+        var view = candidateController.delete(model, 1);
+
+        assertThat(view).isEqualTo("redirect:/candidates");
+    }
+
+    @Test
+    public void whenDeleteCandidateThenRedirectToErrorPage() {
+        when(candidateService.deleteById(1)).thenReturn(false);
+
+        var model = new ConcurrentModel();
+        var view = candidateController.delete(model, 1);
+        var actualMessage = model.getAttribute("message");
+
+        assertThat(view).isEqualTo("errors/404");
+        assertThat(actualMessage).isEqualTo("Кандидат с указанным идентификатором не найден");
+    }
+
 
 }
